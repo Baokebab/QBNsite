@@ -1,7 +1,291 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+@using QBNsite.Resources;
+@using Microsoft.Extensions.Localization;
+@using QBNsite.Helper;
 
-<h1>Hello, world!</h1>
+@inject IStringLocalizer<HomeLocales> L
+@inject IStringLocalizer<PortfolioLocales> PortfolioL
+@inject IStringLocalizer<JobsLocales> JobL
+@inject IJSRuntime JS
 
-Welcome to your new app.
+
+@code {
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender) await JS.InvokeVoidAsync("initCarousel");
+	}
+
+	private List<CardInfo> Cards = new List<CardInfo>();
+	private List<PortfolioItem> PortfolioItems = new List<PortfolioItem>();
+	private List<JobExperience> JobExperiences = new List<JobExperience>();
+
+	protected override void OnInitialized()
+	{
+		//Card blocs init
+		Cards.Add(new CardInfo { id = "card_AboutMe", Title = L["AboutMe"] });
+		Cards.Add(new CardInfo { id = "card_Portfolio", Title = L["PortfolioTitle"] });
+		Cards.Add(new CardInfo { id = "card_Experience", Title = L["Experiences"] });
+		Cards.Add(new CardInfo { id = "card_Education", Title = L["Education"] });
+		Cards.Add(new CardInfo { id = "card_Languages", Title = L["Languages"] });
+		Cards.Add(new CardInfo { id = "card_Skills", Title = L["Skills"] });
+
+		//Portfolio init
+		for (int i = 0; i < 7; i++)
+		{
+			string imageName = PortfolioL[$"ImagePath{i + 1}"];
+			string imagePathPng = "/Images/png/" + imageName + ".png";
+			string imagePathGif = "/Images/gif/" + imageName + ".gif";
+			string imagePathWebP = "/Images/webp/" + imageName + ".webp";
+			string imagePathAvif = "/Images/avif/" + imageName + ".avif";
+
+			PortfolioItems.Add(new PortfolioItem
+			{
+				title = PortfolioL[$"Title{i + 1}"],
+				imagePathPng = imagePathPng,
+				imagePathGif = imagePathGif,
+				imagePathWebP = imagePathWebP,
+				imagePathAvif = imagePathAvif,
+				gameEngine = PortfolioL[$"GameEngine{i + 1}"],
+				hrefLink = PortfolioL[$"PageLink{i + 1}"],
+				description = PortfolioL[$"Description{i + 1}"]
+			});
+		}
+
+		//Experiences Init
+		for (int i = 0; i < 5; i++)
+		{
+			JobExperiences.Add(new JobExperience
+			{
+				jobtitle = JobL[$"JobTitle{i}"],
+				hrefLink = JobL[$"EnterpriseLink{i}"],
+				description = JobL[$"Desc{i}"],
+				dates = JobL[$"Dates{i}"],
+				entrepriseName = JobL[$"EnterpriseName{i}"]
+			});
+		}
+
+	}
+
+	private async Task ScrollToElement(string elementId)
+	{
+		await JS.InvokeVoidAsync("scrollToElement", elementId);
+	}
+
+	private async Task ScrollToTop()
+	{
+		await JS.InvokeVoidAsync("scrollToElement", "Top");
+	}
+}
+
+<PageTitle>@L["Title"]</PageTitle>
+
+<div class="page-container">
+@* 	<div class="sidebar">
+		<div class="sidebar-base" href="#" @onclick=" () => ScrollToTop()">  @L["Title"] </div>
+		@foreach (var card in @Cards)
+		{
+			<div class="sidebar-item" href="#" @onclick=" () => ScrollToElement(card.id)">
+				@card.Title
+			</div>
+		}
+	</div> *@
+	<div class="main-content">
+
+		<header>
+			<div id="Top" class="text-center">
+				<h1>@L["NamePres"]</h1>
+				<p>@L["CurrentDesc"]</p>
+				<p>@L["PhoneNumber"]</p>
+				<p>@L["Mail"]</p>
+				<a class="small-icon" href="@L["Linkedin"]" title="Linkedin Profile" target="_blank" rel="noopener">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg" class="small-icon" />
+				</a>
+			</div>
+		</header>
+
+		<div class="container">
+
+			<div id="card_AboutMe" class="card">
+				<div class="card-block">
+					<h2>@L["AboutMe"]</h2>
+					<p>
+						@L["AboutMeDesc"]
+					</p>
+				</div>
+			</div>
+
+			<div id="card_Portfolio" class="card">
+				<div class="card-block-portfolio">
+					<h2>@L["PortfolioTitle"]</h2>
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner">
+							@for (int i = 0; i < PortfolioItems.Count; i++)
+							{
+								var item = PortfolioItems[i];
+								if (i == 0)
+								{
+									<div class="item active">
+										<div class="carousel-column image-column">
+											<a href="@item.hrefLink">
+												<img src="@item.imagePathAvif" type="image/avif"
+													 onerror="this.onerror=null; this.src='@item.imagePathWebP'; this.onerror=function() { this.onerror=null; this.src='@item.imagePathGif'; this.onerror=function() { this.onerror=null; this.src='@item.imagePathPng'; }; };"
+													 alt="Description de l'image" loading="lazy" />
+											</a>
+										</div>
+										<div class="carousel-column text-column">
+											<h3 class="h5">
+												<a href="@item.hrefLink">@item.title</a>
+											</h3>
+											<p>@item.gameEngine</p>
+											<p>@item.description</p>
+										</div>
+										<a href="@item.hrefLink" class="more-details-link">@PortfolioL["MoreDetails"]</a>
+									</div>
+								}
+								else
+								{
+									<div class="item">
+										<div class="carousel-column image-column">
+											<a href="@item.hrefLink">
+												<img src="@item.imagePathAvif" type="image/avif"
+													 onerror="this.onerror=null; this.src='@item.imagePathWebP'; this.onerror=function() { this.onerror=null; this.src='@item.imagePathGif'; this.onerror=function() { this.onerror=null; this.src='@item.imagePathPng'; }; };"
+													 alt="Description de l'image" loading="lazy" />
+											</a>
+										</div>
+										<div class="carousel-column text-column">
+											<h3 class="h5">
+												<a href="@item.hrefLink">@item.title</a>
+											</h3>
+											<p>@item.gameEngine</p>
+											<p>@item.description</p>
+										</div>
+										<a href="@item.hrefLink" class="more-details-link">@PortfolioL["MoreDetails"]</a>
+									</div>
+								}
+							}
+
+						</div>
+						<div class="carousel-indicators">
+							<button type="button" data-target="#carousel-example-generic" data-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+							<button type="button" data-target="#carousel-example-generic" data-slide-to="1" aria-label="Slide 2"></button>
+							<button type="button" data-target="#carousel-example-generic" data-slide-to="2" aria-label="Slide 3"></button>
+							<button type="button" data-target="#carousel-example-generic" data-slide-to="3" aria-label="Slide 4"></button>
+							<button type="button" data-target="#carousel-example-generic" data-slide-to="4" aria-label="Slide 5"></button>
+							<button type="button" data-target="#carousel-example-generic" data-slide-to="5" aria-label="Slide 6"></button>
+							<button type="button" data-target="#carousel-example-generic" data-slide-to="5" aria-label="Slide 7"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="card_Experience" class="card">
+				<div class="card-block">
+					<h2>@L["Experiences"]</h2>
+					@for (int i = JobExperiences.Count - 1; i >= 0; i--)
+					{
+						var jobExperience = JobExperiences[i];
+						<div class="work-experience">
+							<small class="date">@jobExperience.dates</small>
+							<h3 class="h5 date-title"> @jobExperience.jobtitle - <a href="@jobExperience.hrefLink">@jobExperience.entrepriseName</a></h3>
+							<p>
+								@jobExperience.description
+							</p>
+						</div>
+					}
+				</div>
+			</div>
+
+			<div id="card_Education" class="card">
+				<div class="card-block">
+					<h2>@L["Education"]</h2>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="education-experience">
+								<small class="date">2022-2025</small>
+								<h3 class="h5 date-title">@L["EducationTitle1"]</h3>
+								<p><a href="https://enjmin.cnam.fr/formations/licence-informatique-jeux-video/" title="">Cnam-Enjmin</a></p>
+							</div>
+
+						</div>
+						<div class="col-md-4">
+							<div class="education-experience">
+								<small class="date">2016-2019</small>
+								<h3 class="h5 date-title">@L["EducationTitle2"]</h3>
+								<p><a href="https://mathinfo.unistra.fr/duas/">DUAS</a></p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="education-experience">
+								<small class="date">2014-2016</small>
+								<h3 class="h5 date-title">@L["EducationTitle3"]</h3>
+								<p> <a href="https://lycee-berthelot.fr/superieur">Lycée Marcelin Berthelot</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="card_Languages" class="card">
+				<div class="card-block">
+					<h2>Langues</h2>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="language-experience">
+								<h5>@L["LanguageName1"] <small>@L["LanguageLevel1"]</small></h5>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="language-experience">
+								<h5>@L["LanguageName2"] <small>@L["LanguageLevel2"]</small></h5>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="language-experience">
+								<h5>@L["LanguageName3"] <small>@L["LanguageLevel3"]</small></h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="card_Skills" class="card">
+				<div class="card-block">
+					<h2>@L["Skills"]</h2>
+					<div class="row">
+						<div class="col-md-4">
+							<p>C#, C++, SQL, MongoDB, Unity, Unreal Engine </p>
+						</div>
+						<div class="col-md-4">
+							<p><a href="https://www.photopea.com/"> Photopea</a>, Blender, VegasPro</p>
+						</div>
+						<div class="col-md-4">
+							<p>Pack Office, VBA, R, SAS, MongoDB, Python</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<footer class="footer-container white-text-container text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<p>@L["PhoneNumber"]</p>
+						<p>@L["Mail"]</p>
+						<p>
+							<a class="fa-icon fa-icon-2x" href="@L["Linkedin"]" title="Linkedin Profile">
+								<i class="fa fa-linkedin"></i>
+							</a>
+
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+
+

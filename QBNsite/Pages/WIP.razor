@@ -1,0 +1,23 @@
+﻿@page "/wip"
+
+@using Microsoft.Extensions.Localization;
+@using QBNsite.Resources;
+@inject IStringLocalizer<HomeLocales> L
+@inject NavigationManager NavManager
+
+
+<PageTitle>@L["WIP"]</PageTitle>
+
+<h1>@L["WIP"]</h1>
+
+<p>@L["WIPMessage"]</p>
+
+<button class="btn btn-primary" @onclick="GoHome">@L["BackHome"]</button>
+
+
+@code {
+    private void GoHome()
+    {
+        NavManager.NavigateTo("/");
+    }
+}
