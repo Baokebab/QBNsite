@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "QBNsite",
   "resources": {
-    "hash": "sha256-UQixFScwaI1G/eg5K6Dfif4mDwv33kC7Fgx4A1db4Y4=",
+    "hash": "sha256-99ZDGbHBmO+PGo9IvsZ0y6GJTp3E92+OiXGP1J6z3UM=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-YyxJV6dv935qHoQAmjB+2qRjHeGpm4SyWxE0T/KvsIE="
     },
@@ -49,7 +49,7 @@
       "System.Text.Json.wasm": "sha256-u117yrdJrUX/Q+qzw1fc65jx/ra8VGCzdSzuYl4xMUE=",
       "System.Text.RegularExpressions.wasm": "sha256-hGZleNEZV17Dz5kzEWFvNqnurwCDj1PZ9QMtVOHwaI0=",
       "System.Private.CoreLib.wasm": "sha256-HLwNl20nHgugYun92Rav7cGNU651cj35ODobUnw67u8=",
-      "QBNsite.wasm": "sha256-TMUmwsnQkqlXnVNuhRZXgeH6rEn3Igm7xq+1G8eldbk="
+      "QBNsite.wasm": "sha256-FdSUE4R2ZccVwBThPKKS7Qv7VcVD7axZP3cPelx3iA4="
     }
   },
   "cacheBootResources": true,
