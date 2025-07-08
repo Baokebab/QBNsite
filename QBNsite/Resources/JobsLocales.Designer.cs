@@ -142,7 +142,7 @@ namespace QBNsite.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Développement d&apos;une application VR de risque routier..
+        ///   Recherche une chaîne localisée semblable à Développement d&apos;une application VR de risque routier avec le moteur de jeu Unity (C#)..
         /// </summary>
         public static string Desc4 {
             get {
@@ -250,7 +250,7 @@ namespace QBNsite.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Stagiaire.
+        ///   Recherche une chaîne localisée semblable à Stagiaire en actuariat.
         /// </summary>
         public static string JobTitle0 {
             get {
@@ -259,7 +259,7 @@ namespace QBNsite.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Stagiaire.
+        ///   Recherche une chaîne localisée semblable à Stagiaire en data science.
         /// </summary>
         public static string JobTitle1 {
             get {
@@ -286,7 +286,7 @@ namespace QBNsite.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Dev Unity .
+        ///   Recherche une chaîne localisée semblable à Développeur Unity VR.
         /// </summary>
         public static string JobTitle4 {
             get {

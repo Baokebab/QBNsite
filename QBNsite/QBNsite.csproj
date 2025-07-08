@@ -40,6 +40,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>HomeLocales.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\JobsLocales.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>JobsLocales.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

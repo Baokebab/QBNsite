@@ -2,6 +2,10 @@
     margin-bottom: 50px;
 }
 
+.underName {
+    color: #fff;
+    font-size: 18px;
+}
 h1, h2, .h2, .h1 {
     font-family: Oswald, Helvetica, Arial, sans-serif;
     font-weight: 400;
@@ -397,9 +401,15 @@ sidebar.ul {
 }
 
 @media (max-width: 768px) {
+
+    .underName {
+        font-size: 14px;
+    }
+
     .h1,
     h1 {
-        font-size: 40px
+        font-size: 40px;
+        padding-top: 3.5rem;
     }
 
     .h2,
@@ -523,5 +533,13 @@ sidebar.ul {
 
     .work-experience {
         margin-bottom: 8px
+    }
+
+    .main-content{
+        padding: 5px;
+    }
+    .container {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
     }
 }

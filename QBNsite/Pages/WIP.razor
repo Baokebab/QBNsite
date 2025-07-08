@@ -6,7 +6,16 @@
 
 @inject IStringLocalizer<HomeLocales> L
 @inject NavigationManager NavManager
-@inject Helper HelperInstance; 
+@inject Helper HelperInstance;
+
+@code {
+	private void GoHome()
+	{
+		NavManager.NavigateTo(HelperInstance.homePath);
+	}
+
+	string wipImagePath => HelperInstance.homePath + "Images/png/WIP.png";
+}
 
 <PageTitle>@L["WIP"]</PageTitle>
 
@@ -16,10 +25,6 @@
 
 <button class="btn btn-primary" @onclick="GoHome">@L["BackHome"]</button>
 
+<p> </p>
+<img src="@wipImagePath"/>
 
-@code {
-    private void GoHome()
-    {
-        NavManager.NavigateTo(HelperInstance.homePath);
-    }
-}

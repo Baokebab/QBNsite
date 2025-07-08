@@ -103,6 +103,21 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
+.loading-logo-container {
+    text-align: center;
+    color: #fff; /* Pour un fond sombre */
+}
+
+.loading-logo {
+    width: 150px;
+    height: auto;
+    animation: pulse 2s infinite alternate; 
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
 code {
     color: #c02d76;
 }
@@ -111,9 +126,5 @@ code {
     html, body {
         overscroll-behavior: none;
         height: 100%;
-    }
-
-    .main-content {
-        overscroll-behavior: none;
     }
 }
