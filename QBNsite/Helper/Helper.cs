@@ -1,8 +1,18 @@
-﻿
-using System.IO;
+﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 namespace QBNsite.Helper
 {
+
+    public class Helper
+    {
+        private readonly IWebAssemblyHostEnvironment _env;
+        public Helper(IWebAssemblyHostEnvironment hostEnvironment)
+        {
+            _env = hostEnvironment;
+        }
+
+        public string homePath => _env.IsDevelopment() ? "/" : "/QuocBaoNguyen/";
+    }
     public class PortfolioItem
     {
         public string title = "title";
@@ -29,4 +39,6 @@ namespace QBNsite.Helper
         public string hrefLink = "https://www.google.com";
         public string dates = "1997-now";
     }
+
+    
 }

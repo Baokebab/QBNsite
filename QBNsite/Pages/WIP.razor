@@ -2,9 +2,11 @@
 
 @using Microsoft.Extensions.Localization;
 @using QBNsite.Resources;
+@using QBNsite.Helper;
+
 @inject IStringLocalizer<HomeLocales> L
 @inject NavigationManager NavManager
-
+@inject Helper HelperInstance; 
 
 <PageTitle>@L["WIP"]</PageTitle>
 
@@ -18,6 +20,6 @@
 @code {
     private void GoHome()
     {
-        NavManager.NavigateTo("/");
+        NavManager.NavigateTo(HelperInstance.homePath);
     }
 }
