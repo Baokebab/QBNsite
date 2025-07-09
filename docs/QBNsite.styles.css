@@ -511,7 +511,6 @@ p[b-stu6smjf3l] {
 
 .column[b-stu6smjf3l] {
     float: left;
-    width: %;
     padding: 5px;
 }
 
@@ -538,8 +537,8 @@ p[b-stu6smjf3l] {
     top: 0;
     left: 0;
     height: 100vh;
-    width: 10vw;
-    min-width: 100px;
+/*    width: 10vw;
+    min-width: 100px;*/
     background-color: rgba(0, 0, 0, 0.4);
     padding: 0;
     box-sizing: border-box;
@@ -620,12 +619,6 @@ sidebar.ul[b-stu6smjf3l] {
         padding-left: 0rem;
         padding-top: 0rem;
     }
-
-    .sidebar[b-stu6smjf3l] {
-        display: none;
-        min-width: 80px;
-    }
-
     .sidebar-item[b-stu6smjf3l] {
         display: block;
         padding: 8px;

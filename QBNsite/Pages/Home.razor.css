@@ -342,7 +342,6 @@ p {
 
 .column {
     float: left;
-    width: %;
     padding: 5px;
 }
 
@@ -369,8 +368,8 @@ p {
     top: 0;
     left: 0;
     height: 100vh;
-    width: 10vw;
-    min-width: 100px;
+/*    width: 10vw;
+    min-width: 100px;*/
     background-color: rgba(0, 0, 0, 0.4);
     padding: 0;
     box-sizing: border-box;
@@ -451,12 +450,6 @@ sidebar.ul {
         padding-left: 0rem;
         padding-top: 0rem;
     }
-
-    .sidebar {
-        display: none;
-        min-width: 80px;
-    }
-
     .sidebar-item {
         display: block;
         padding: 8px;
